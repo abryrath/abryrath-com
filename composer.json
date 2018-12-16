@@ -2,7 +2,7 @@
   "require": {
     "craftcms/cms": "^3.0.0",
     "vlucas/phpdotenv": "^2.4.0",
-    "abryrath/syncdb": "^1.0"
+    "abryrath/syncdb": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -22,8 +22,8 @@
   },
   "repositories": [
     {
-      "type": "path",
-      "url": "../../Plugins/syncdb"
+      "type": "vcs",
+      "url": "https://github.com/abryrath/craft-syncdb"
     }
   ]
 }

@@ -1,17 +1,23 @@
 [
     {
         "name": "abryrath/syncdb",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/abryrath/craft-syncdb.git",
+            "reference": "a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d"
+        },
         "dist": {
-            "type": "path",
-            "url": "../../Plugins/syncdb",
-            "reference": "6bc3f29f3a90a0039b6aee5f4303bcf94b87f244",
-            "shasum": null
+            "type": "zip",
+            "url": "https://api.github.com/repos/abryrath/craft-syncdb/zipball/a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d",
+            "reference": "a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d",
+            "shasum": ""
         },
         "require": {
             "craftcms/cms": "^3.0.0-RC1"
         },
+        "time": "2018-12-16T22:50:40+00:00",
         "type": "craft-plugin",
         "extra": {
             "name": "syncdb",
@@ -21,7 +27,7 @@
             "changelogUrl": "???",
             "class": "abryrath\\syncdb\\Syncdb"
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "abryrath\\syncdb\\": "src/"
@@ -46,7 +52,8 @@
         ],
         "support": {
             "docs": "???",
-            "issues": "???"
+            "issues": "???",
+            "source": "https://github.com/abryrath/craft-syncdb/tree/master"
         }
     },
     {

@@ -13,7 +13,7 @@ return array (
       '@abryrath/syncdb' => $vendorDir . '/abryrath/syncdb/src',
     ),
     'name' => 'syncdb',
-    'version' => '1.0.0',
+    'version' => 'dev-master',
     'description' => 'Plugin to sync database between different environments',
     'developer' => 'Abry Rath <abryrath@gmail.com>',
     'developerUrl' => 'github.com/abryrath',
