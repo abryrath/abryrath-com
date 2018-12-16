@@ -1,0 +1,28 @@
+{
+  "name": "abryrath-com",
+  "version": "1.0.0",
+  "main": "assets/js/App.js",
+  "repository": "git@github.com:abryrath/abryrath-com.git",
+  "author": "Abry Rath <abryrath@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^2.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "scripts": {
+    "dev": "webpack --config webpack.dev.config.js --mode development"
+  }
+}

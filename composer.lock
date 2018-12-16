@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed6e40d5680ef0b3d326fdb21b79a664",
+    "content-hash": "4c093850ee5307e367a2f2ad2c7ae924",
     "packages": [
+        {
+            "name": "abryrath/syncdb",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "../../Plugins/syncdb",
+                "reference": "6bc3f29f3a90a0039b6aee5f4303bcf94b87f244",
+                "shasum": null
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0-RC1"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "syncdb",
+                "handle": "syncdb",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "changelogUrl": "???",
+                "class": "abryrath\\syncdb\\Syncdb"
+            },
+            "autoload": {
+                "psr-4": {
+                    "abryrath\\syncdb\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abry Rath <abryrath@gmail.com>",
+                    "homepage": "github.com/abryrath"
+                }
+            ],
+            "description": "Plugin to sync database between different environments",
+            "keywords": [
+                "cms",
+                "craft",
+                "craft-plugin",
+                "craftcms",
+                "syncdb"
+            ],
+            "support": {
+                "docs": "???",
+                "issues": "???"
+            }
+        },
         {
             "name": "cebe/markdown",
             "version": "1.1.2",
