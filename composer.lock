@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cd5c72f37fa48232bfda9d591cc0716",
+    "content-hash": "3a736ebb8ef41ee05d7f41cc6dbbaa1f",
     "packages": [
         {
-            "name": "abryrath/syncdb",
+            "name": "abryrath/craft-sync-db",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abryrath/craft-syncdb.git",
-                "reference": "a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d"
+                "reference": "b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abryrath/craft-syncdb/zipball/a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d",
-                "reference": "a2a74c64484a98fc6fd9fa57a50b7e71aba26f4d",
+                "url": "https://api.github.com/repos/abryrath/craft-syncdb/zipball/b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589",
+                "reference": "b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589",
                 "shasum": ""
             },
             "require": {
@@ -25,16 +25,19 @@
             },
             "type": "craft-plugin",
             "extra": {
-                "name": "syncdb",
-                "handle": "syncdb",
-                "hasCpSettings": false,
-                "hasCpSection": false,
+                "name": "craft-sync-db",
+                "handle": "craft-sync-db",
+                "hasCpSettings": true,
+                "hasCpSection": true,
                 "changelogUrl": "???",
-                "class": "abryrath\\syncdb\\Syncdb"
+                "components": {
+                    "sync": "abryrath\\craftsyncdb\\services\\Sync"
+                },
+                "class": "abryrath\\craftsyncdb\\Craftsyncdb"
             },
             "autoload": {
                 "psr-4": {
-                    "abryrath\\syncdb\\": "src/"
+                    "abryrath\\craftsyncdb\\": "src/"
                 }
             },
             "license": [
@@ -42,24 +45,24 @@
             ],
             "authors": [
                 {
-                    "name": "Abry Rath <abryrath@gmail.com>",
+                    "name": "Abry Rath<abryrath@gmail.com>",
                     "homepage": "github.com/abryrath"
                 }
             ],
-            "description": "Plugin to sync database between different environments",
+            "description": "Craft 3 plugin to sync database across environments",
             "keywords": [
                 "cms",
                 "craft",
                 "craft-plugin",
-                "craftcms",
-                "syncdb"
+                "craft-sync-db",
+                "craftcms"
             ],
             "support": {
                 "docs": "???",
                 "issues": "???",
                 "source": "https://github.com/abryrath/craft-syncdb/tree/master"
             },
-            "time": "2018-12-16T22:50:40+00:00"
+            "time": "2018-12-17T13:28:52+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -2901,7 +2904,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "abryrath/syncdb": 20
+        "abryrath/craft-sync-db": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

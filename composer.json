@@ -2,7 +2,7 @@
   "require": {
     "craftcms/cms": "^3.0.0",
     "vlucas/phpdotenv": "^2.4.0",
-    "abryrath/syncdb": "dev-master"
+    "abryrath/craft-sync-db": "dev-master"
   },
   "autoload": {
     "psr-4": {
