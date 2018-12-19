@@ -2,10 +2,9 @@
   "require": {
     "craftcms/cms": "^3.0.0",
     "vlucas/phpdotenv": "^2.4.0",
-    "abryrath/craft-sync-db": "dev-master",
-    "abryrath/syncdb": "dev-master"
+    "abryrath/craft-sync-db": "dev-master"
   },
-  "minimum-stability": "beta",
+  "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
       "modules\\adminmodule\\": "modules/admin/src"
