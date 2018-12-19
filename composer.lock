@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3a736ebb8ef41ee05d7f41cc6dbbaa1f",
+    "content-hash": "9765410985eefd1084aad796e6ae0ce4",
     "packages": [
         {
             "name": "abryrath/craft-sync-db",
@@ -12,15 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/abryrath/craft-syncdb.git",
-                "reference": "b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589"
+                "reference": "d3c95a8ddd2eb21a26df9c721d1728535058aef2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abryrath/craft-syncdb/zipball/b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589",
-                "reference": "b6ebba8f2b1c4f3d8c923b83d5ad5c9db6219589",
+                "url": "https://api.github.com/repos/abryrath/craft-syncdb/zipball/d3c95a8ddd2eb21a26df9c721d1728535058aef2",
+                "reference": "d3c95a8ddd2eb21a26df9c721d1728535058aef2",
                 "shasum": ""
             },
             "require": {
+                "abryrath/syncdb": "dev-master",
                 "craftcms/cms": "^3.0.0-RC1"
             },
             "type": "craft-plugin",
@@ -40,29 +41,61 @@
                     "abryrath\\craftsyncdb\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Abry Rath<abryrath@gmail.com>",
-                    "homepage": "github.com/abryrath"
+                    "homepage": "https://github.com/abryrath"
                 }
             ],
             "description": "Craft 3 plugin to sync database across environments",
             "keywords": [
+                "Craft",
                 "cms",
-                "craft",
                 "craft-plugin",
                 "craft-sync-db",
                 "craftcms"
             ],
-            "support": {
-                "docs": "???",
-                "issues": "???",
-                "source": "https://github.com/abryrath/craft-syncdb/tree/master"
+            "time": "2018-12-19T01:57:51+00:00"
+        },
+        {
+            "name": "abryrath/syncdb",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/abryrath/syncdb.git",
+                "reference": "1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32"
             },
-            "time": "2018-12-17T13:28:52+00:00"
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/abryrath/syncdb/zipball/1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32",
+                "reference": "1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32",
+                "shasum": ""
+            },
+            "require": {
+                "vlucas/phpdotenv": "^2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "abryrath\\syncdb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abry Rath",
+                    "email": "abryrath@gmail.com"
+                }
+            ],
+            "description": "Library to assist with syncing databases across different environments",
+            "time": "2018-12-19T01:31:54+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -382,16 +415,16 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.0.35",
+            "version": "3.1.0-beta.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/craftcms/cms.git",
-                "reference": "620afa6ed9d036ee1910480e8d01789d623a6ff7"
+                "reference": "3ee34d01c4841c62722778b2efd837ab65bc440a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/620afa6ed9d036ee1910480e8d01789d623a6ff7",
-                "reference": "620afa6ed9d036ee1910480e8d01789d623a6ff7",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/3ee34d01c4841c62722778b2efd837ab65bc440a",
+                "reference": "3ee34d01c4841c62722778b2efd837ab65bc440a",
                 "shasum": ""
             },
             "require": {
@@ -418,8 +451,10 @@
                 "php": ">=7.0.0",
                 "pixelandtonic/imagine": "~0.7.1.2",
                 "seld/cli-prompt": "^1.0.3",
+                "symfony/yaml": "^3.2|^4.0",
                 "true/punycode": "^2.1.0",
                 "twig/twig": "^2.5.0",
+                "yii2tech/ar-softdelete": "^1.0.2",
                 "yiisoft/yii2": "~2.0.15.1",
                 "yiisoft/yii2-debug": "^2.0.10",
                 "yiisoft/yii2-queue": "2.1.0",
@@ -464,7 +499,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2018-12-11T18:12:34+00:00"
+            "time": "2018-12-14T22:44:59+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -2190,6 +2225,61 @@
             "time": "2017-07-13T13:05:09+00:00"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v3.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/console": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2017-07-23T12:43:26+00:00"
+        },
+        {
             "name": "true/punycode",
             "version": "v2.1.1",
             "source": {
@@ -2351,6 +2441,56 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "yii2tech/ar-softdelete",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yii2tech/ar-softdelete.git",
+                "reference": "0cc8cd22aa7fd66c1d02d76e811a55c2f0eb9be6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yii2tech/ar-softdelete/zipball/0cc8cd22aa7fd66c1d02d76e811a55c2f0eb9be6",
+                "reference": "0cc8cd22aa7fd66c1d02d76e811a55c2f0eb9be6",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii2tech\\ar\\softdelete\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Provides support for ActiveRecord soft delete in Yii2",
+            "keywords": [
+                "active",
+                "delete",
+                "integrity",
+                "record",
+                "smart",
+                "soft",
+                "yii2"
+            ],
+            "time": "2018-05-30T11:41:32+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -2902,9 +3042,10 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "stability-flags": {
-        "abryrath/craft-sync-db": 20
+        "abryrath/craft-sync-db": 20,
+        "abryrath/syncdb": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

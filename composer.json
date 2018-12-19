@@ -2,8 +2,10 @@
   "require": {
     "craftcms/cms": "^3.0.0",
     "vlucas/phpdotenv": "^2.4.0",
-    "abryrath/craft-sync-db": "dev-master"
+    "abryrath/craft-sync-db": "dev-master",
+    "abryrath/syncdb": "dev-master"
   },
+  "minimum-stability": "beta",
   "autoload": {
     "psr-4": {
       "modules\\": "modules/"
@@ -19,11 +21,5 @@
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ]
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/abryrath/craft-syncdb"
-    }
-  ]
+  }
 }

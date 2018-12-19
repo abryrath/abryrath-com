@@ -22,9 +22,17 @@
             "name": "Dump",
             "type": "php",
             "request": "launch",
-            "program": "/home/abry/Code/Sites/abryrath-com/craft",
-            "args": ["syncdb/sync-db/dumpmysql"],
-            "port": 9000
+            "program": "/Users/abryrath/Code/Sites/abryrath-com/craft",
+            "args": ["craft-sync-db/sync/dumpmysql"],
+            "port": 9072
+        },
+        {
+            "name": "Sync",
+            "type": "php",
+            "request": "launch",
+            "program": "/Users/abryrath/Code/Sites/abryrath-com/craft",
+            "args": ["craft-sync-db/sync/sync-db"],
+            "port": 9072
         }
     ]
 }
