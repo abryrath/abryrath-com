@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/abryrath/syncdb.git",
-                "reference": "1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32"
+                "reference": "63f9949eb4ad841855fc8f031950a201e7957a0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abryrath/syncdb/zipball/1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32",
-                "reference": "1b04dc038c619f55e0067f1ab54cbcd3e6fe4e32",
+                "url": "https://api.github.com/repos/abryrath/syncdb/zipball/63f9949eb4ad841855fc8f031950a201e7957a0c",
+                "reference": "63f9949eb4ad841855fc8f031950a201e7957a0c",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
                 }
             ],
             "description": "Library to assist with syncing databases across different environments",
-            "time": "2018-12-19T01:31:54+00:00"
+            "time": "2018-12-19T12:31:46+00:00"
         },
         {
             "name": "cebe/markdown",

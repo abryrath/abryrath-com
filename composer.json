@@ -8,7 +8,7 @@
   "minimum-stability": "beta",
   "autoload": {
     "psr-4": {
-      "modules\\": "modules/"
+      "modules\\adminmodule\\": "modules/admin/src"
     }
   },
   "config": {
