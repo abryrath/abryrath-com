@@ -11,18 +11,19 @@
 namespace modules\adminmodule;
 
 use Craft;
-
 use craft\web\View;
 use yii\base\Event;
 use yii\base\Module;
-use craft\web\twig\variables\Cp;
+use craft\web\UrlManager;
 use craft\events\TemplateEvent;
-
 use craft\i18n\PhpMessageSource;
+use craft\web\twig\variables\Cp;
 use yii\base\InvalidConfigException;
 use craft\events\RegisterCpNavItemsEvent;
 use craft\events\RegisterTemplateRootsEvent;
+use craft\console\Application as ConsoleApplication;
 use modules\adminmodule\assetbundles\adminmodule\AdminModuleAsset;
+use craft\events\RegisterUrlRulesEvent;
 
 /**
  * Class AdminModule
@@ -34,29 +35,21 @@ use modules\adminmodule\assetbundles\adminmodule\AdminModuleAsset;
  */
 class AdminModule extends Module
 {
-    // Static Properties
-    // =========================================================================
-
-    /**
-     * @var AdminModule
-     */
     public static $instance;
 
-    // Public Methods
-    // =========================================================================
-
-    /**
-     * @inheritdoc
-     */
     public function __construct($id, $parent = null, array $config = [])
     {
         Craft::setAlias('@modules/adminmodule', $this->getBasePath());
-        $this->controllerNamespace = 'modules\adminmodule\controllers';
+        if (Craft::$app instanceof ConsoleApplication) {
+            $this->controllerNamespace = 'modules\adminmodule\console\controllers';
+        } else {
+            $this->controllerNamespace = 'modules\adminmodule\controllers';
+        }
 
         // Translation category
         $i18n = Craft::$app->getI18n();
         /** @noinspection UnSafeIsSetOverArrayInspection */
-        if (!isset($i18n->translations[$id]) && !isset($i18n->translations[$id.'*'])) {
+        if (!isset($i18n->translations[$id]) && !isset($i18n->translations[$id . '*'])) {
             $i18n->translations[$id] = [
                 'class' => PhpMessageSource::class,
                 'sourceLanguage' => 'en-US',
@@ -67,11 +60,15 @@ class AdminModule extends Module
         }
 
         // Base template directory
-        Event::on(View::class, View::EVENT_REGISTER_CP_TEMPLATE_ROOTS, function (RegisterTemplateRootsEvent $e) {
-            if (is_dir($baseDir = $this->getBasePath().DIRECTORY_SEPARATOR.'templates')) {
-                $e->roots[$this->id] = $baseDir;
+        Event::on(
+            View::class,
+            View::EVENT_REGISTER_CP_TEMPLATE_ROOTS,
+            function (RegisterTemplateRootsEvent $e) {
+                if (is_dir($baseDir = $this->getBasePath() . DIRECTORY_SEPARATOR . 'templates')) {
+                    $e->roots[$this->id] = $baseDir;
+                }
             }
-        });
+        );
 
         // Set this as the global instance of this module class
         static::setInstance($this);
@@ -96,7 +93,7 @@ class AdminModule extends Module
                         Craft::$app->getView()->registerAssetBundle(AdminModuleAsset::class);
                     } catch (InvalidConfigException $e) {
                         Craft::error(
-                            'Error registering AssetBundle - '.$e->getMessage(),
+                            'Error registering AssetBundle - ' . $e->getMessage(),
                             __METHOD__
                         );
                     }
@@ -104,15 +101,27 @@ class AdminModule extends Module
             );
         }
 
+        $this->setComponents([
+            'backup' => \modules\adminmodule\services\BackupService::class,
+        ]);
+
         Event::on(
             Cp::class,
             Cp::EVENT_REGISTER_CP_NAV_ITEMS,
             function (RegisterCpNavItemsEvent $event) {
                 $event->navItems[] = [
-                    'url' => 'admin',
-                    'label' => 'Actions',
-                    'icon' => '@modules/adminmodule/src/assetbundles/adminmodule/dist/img/AdminModule-icon.svg',
+                    'url' => 'admin/projects',
+                    'label' => 'Projects',
+                    'icon' => '@modules/adminmodule/assetbundles/adminmodule/dist/img/AdminModule-icon.svg',
                 ];
+            }
+        );
+
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules['admin/projects'] = 'admin/project/index';
             }
         );
 
@@ -124,11 +133,5 @@ class AdminModule extends Module
             ),
             __METHOD__
         );
-
-        //var_dump($this->id);
-        //die;
     }
-
-    // Protected Methods
-    // =========================================================================
 }
