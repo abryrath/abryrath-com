@@ -24,6 +24,19 @@
             required: true,
         }) }}
 
+        {{ forms.selectField({
+            name: 'backupServerId',
+            label: 'Backup Server',
+            required: true,
+            options: servers,
+        }) }}
+
+        {{ forms.textField({
+            name: 'backupServerPath',
+            label: 'Backup Server Path',
+            required: true,
+        }) }}
+
         {{ forms.textField({
             name: 'backupFrequency',
             label: 'Backup Frequency',

@@ -5,6 +5,7 @@
 {% block content %}
     <div id="content">
         <h1>Backups</h1>
+        <div class="btn" data-project-id="{{ project.id }}" id="CreateBackup">Create backup</div>
         {% for backup in project.backups %}
             {% include 'admin/backups/listing' with {
                 backup: backup

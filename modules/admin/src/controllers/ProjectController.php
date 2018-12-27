@@ -59,6 +59,8 @@ class ProjectController extends Controller
         $project->displayName = $request->getBodyParam('displayName');
         $project->serverId = $request->getBodyParam('serverId');
         $project->serverSrcPath = $request->getBodyParam('serverSrcPath');
+        $project->backupServerId = $request->getBodyParam('backupServerId');
+        $project->backupServerPath = $request->getBodyParam('backupServerPath');
         $project->backupFrequency = $request->getBodyParam('backupFrequency');
         $project->keepRecords = $request->getBodyParam('keepRecords');
         $project->email = $request->getBodyParam('email');

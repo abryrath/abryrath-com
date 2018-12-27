@@ -97,9 +97,11 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/project */ "./assets/js/modules/project.js");
 /* harmony import */ var _modules_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/server */ "./assets/js/modules/server.js");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/createBackupBtn */ "./assets/js/modules/createBackupBtn.js");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -111,10 +113,69 @@ var AdminModule = function AdminModule() {
   console.log('Admin');
   Object(_modules_project__WEBPACK_IMPORTED_MODULE_0__["onInit"])();
   Object(_modules_server__WEBPACK_IMPORTED_MODULE_1__["onInit"])();
+  Object(_modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__["onInit"])();
 };
 
 window.onload = function () {
   new AdminModule();
+};
+
+/***/ }),
+
+/***/ "./assets/js/modules/createBackupBtn.js":
+/*!**********************************************!*\
+  !*** ./assets/js/modules/createBackupBtn.js ***!
+  \**********************************************/
+/*! exports provided: onInit */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onInit", function() { return onInit; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CreateBackupBtn =
+/*#__PURE__*/
+function () {
+  function CreateBackupBtn(node) {
+    _classCallCheck(this, CreateBackupBtn);
+
+    this.node = node;
+    this.projectId = node.dataset.projectId;
+    this.node.addEventListener('click', this.createBackup.bind(this));
+  }
+
+  _createClass(CreateBackupBtn, [{
+    key: "createBackup",
+    value: function createBackup() {
+      fetch("/admin/admin/projects/".concat(this.projectId, "/backups/new"), {
+        method: 'GET',
+        credentials: 'same-origin',
+        mode: 'same-origin',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }).then(function (resp) {
+        return resp.json();
+      }).then(function (data) {
+        return console.log(data);
+      });
+    }
+  }]);
+
+  return CreateBackupBtn;
+}();
+
+var onInit = function onInit() {
+  var btn = document.querySelector('#CreateBackup');
+
+  if (btn) {
+    new CreateBackupBtn(btn);
+  }
 };
 
 /***/ }),

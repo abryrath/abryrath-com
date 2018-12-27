@@ -35,6 +35,13 @@ use craft\events\RegisterUrlRulesEvent;
  */
 class AdminModule extends Module
 {
+    const SERVERS_TABLE = 'abryrath_admin_servers';
+    const PROJECTS_TABLE = 'abryrath_admin_projects';
+    const BACKUPS_TABLE = 'abryrath_admin_backups';
+
+    const FK_PROJECTS_SERVERS_ID = 'dk_projects_servers_id';
+    const FK_BACKUPS_PROJECTS_ID = 'fk_backups_projects_id';
+
     public static $instance;
 
     public function __construct($id, $parent = null, array $config = [])
@@ -126,6 +133,7 @@ class AdminModule extends Module
                 $event->rules['admin/projects'] = 'admin/project/index';
                 $event->rules['admin/projects/new'] = 'admin/project/new-project';
                 $event->rules['admin/projects/<id>'] = 'admin/project/show';
+                $event->rules['admin/projects/<projectId>/backups/new'] = 'admin/backup/create';
             }
         );
 
