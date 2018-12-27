@@ -1,0 +1,34 @@
+{% import '_includes/forms' as forms %}
+<div id="newServer">
+    <div class="btn" data-toggle>
+        New Server
+    </div>
+    <form data-content class="ServerForm">
+        {{ csrfInput() }}
+        {{ forms.textField({
+            name: 'displayName',
+            label: 'Display Name',
+            required: true,
+        }) }}
+
+        {{ forms.textField({
+            name: 'hostname',
+            label: 'Server Hostname',
+            required: true,
+        }) }}
+
+        {{ forms.textField({
+            name: 'username',
+            label: 'Username',
+            required: false,
+        }) }}
+
+        {{ forms.textField({
+            name: 'port',
+            label: 'Port',
+            required: false,
+        }) }}
+
+        <div class="btn submit" id="submit">Create</div>
+    </form>
+</div>

@@ -1,10 +1,16 @@
-class Admin
-{
+import { onInit as newProject } from './modules/project';
+import { onInit as newServer } from './modules/server';
+
+import '../scss/Admin.scss';
+
+class AdminModule {
     constructor() {
-        console.log('Hello, admin');
+        console.log('Admin');
+        newProject();
+        newServer();
     }
 }
 
 window.onload = () => {
-    new Admin();
+    new AdminModule();
 };

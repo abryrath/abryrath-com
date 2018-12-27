@@ -121,7 +121,10 @@ class AdminModule extends Module
             UrlManager::class,
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
+                $event->rules['admin/servers'] = 'admin/server/index';
+                $event->rules['admin/servers/new'] = 'admin/server/new-server';
                 $event->rules['admin/projects'] = 'admin/project/index';
+                $event->rules['admin/projects/new'] = 'admin/project/new-project';
             }
         );
 

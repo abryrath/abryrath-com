@@ -1,0 +1,47 @@
+{% import '_includes/forms' as forms %}
+<div id="newProject">
+    <div class="btn" data-toggle>
+        New Project
+    </div>
+    <form data-content class="ProjectForm">
+        {{ csrfInput() }}
+        {{ forms.textField({
+            name: 'displayName',
+            label: 'Display Name',
+            required: true,
+        }) }}
+
+        {{ forms.selectField({
+            name: 'serverId',
+            label: 'Server',
+            required: true,
+            options: servers,
+        }) }}
+
+        {{ forms.textField({
+            name: 'serverSrcPath',
+            label: 'Server Source Path',
+            required: true,
+        }) }}
+
+        {{ forms.textField({
+            name: 'backupFrequency',
+            label: 'Backup Frequency',
+            required: true,
+        }) }}
+
+        {{ forms.textField({
+            name: 'keepRecords',
+            label: 'Number of backups to keep',
+            required: true,
+        }) }}
+
+        {{ forms.textField({
+            name: 'email',
+            label: 'Email',
+            required: true
+        }) }}
+
+        <div class="btn submit" id="submit">Create</div>
+    </form>
+</div>

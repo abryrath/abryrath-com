@@ -1,0 +1,20 @@
+{% extends '_layouts/cp' %}
+
+{% do view.registerAssetBundle("modules\\adminmodule\\assetbundles\\AdminModule\\AdminModuleAsset") %}
+
+{% set title = 'Servers' %}
+
+{% block main %}
+    <div id="content">
+        <div class="Servers">
+            {% if servers is defined %}
+                {% for server in servers %}
+                    {% include 'admin/servers/entry' with {
+                        server: server
+                    } only %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% include 'admin/servers/new' %}
+    </div>
+{% endblock %}

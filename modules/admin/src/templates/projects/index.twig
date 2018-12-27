@@ -1,0 +1,21 @@
+{% extends '_layouts/cp' %}
+
+{% do view.registerAssetBundle("modules\\adminmodule\\assetbundles\\AdminModule\\AdminModuleAsset") %}
+
+{% set title = 'Projects' %}
+
+{% block main %}
+    <div id="content">
+        <div class="Projects">
+            {% if projects is defined %}
+                {% for project in projects %}
+                    {% include 'admin/projects/entry' with {
+                        project: project,
+                        servers: servers,
+                    } only %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% include 'admin/projects/new' %}
+    </div>
+{% endblock %}
