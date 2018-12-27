@@ -1,1 +1,14 @@
-<div>Project</div>
+{% extends '_layouts/cp' %}
+
+{% set title = 'Project: ' ~ project.displayName %}
+
+{% block content %}
+    <div id="content">
+        <h1>Backups</h1>
+        {% for backup in project.backups %}
+            {% include 'admin/backups/listing' with {
+                backup: backup
+            } only %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -125,6 +125,7 @@ class AdminModule extends Module
                 $event->rules['admin/servers/new'] = 'admin/server/new-server';
                 $event->rules['admin/projects'] = 'admin/project/index';
                 $event->rules['admin/projects/new'] = 'admin/project/new-project';
+                $event->rules['admin/projects/<id>'] = 'admin/project/show';
             }
         );
 

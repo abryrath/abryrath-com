@@ -36,6 +36,19 @@ class ProjectController extends Controller
         );
     }
 
+    public function actionShow(int $id)
+    {
+        $project = Project::find($id)->one();
+        if (!$project) {
+            echo "Invalid project id";
+            die;
+        }
+
+        return $this->renderTemplate('admin/projects/entry', [
+            'project' => $project,
+        ]);
+    }
+
     public function actionNewProject()
     {
         $this->requirePostRequest();
@@ -56,5 +69,9 @@ class ProjectController extends Controller
                 'project' => $project->toArray(),
             ]);
         }
+
+        return json_encode([
+            'success' => false,
+        ]);
     }
 }

@@ -16,4 +16,9 @@ class Project extends ActiveRecord
     {
         return $this->hasOne(Server::class, ['serverId' => 'id']);
     }
+
+    public function getBackups()
+    {
+        return $this->hasMany(Backup::class, ['projectId' => 'id']);
+    }
 }

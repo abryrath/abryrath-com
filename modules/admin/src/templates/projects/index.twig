@@ -9,7 +9,7 @@
         <div class="Projects">
             {% if projects is defined %}
                 {% for project in projects %}
-                    {% include 'admin/projects/entry' with {
+                    {% include 'admin/projects/listing' with {
                         project: project,
                         servers: servers,
                     } only %}

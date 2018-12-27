@@ -12,7 +12,7 @@ class m181225_143612_create_backups extends Migration
 {
     const SERVERS_TABLE = 'abryrath_admin_servers';
     const PROJECTS_TABLE = 'abryrath_admin_projects';
-    const BACKUPS_TABLE = 'abryrath_admin_table';
+    const BACKUPS_TABLE = 'abryrath_admin_backups';
 
     const FK_PROJECTS_SERVERS_ID = 'dk_projects_servers_id';
     const FK_BACKUPS_PROJECTS_ID = 'fk_backups_projects_id';
