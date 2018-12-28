@@ -11,19 +11,20 @@
 namespace modules\adminmodule;
 
 use Craft;
-use craft\web\View;
-use yii\base\Event;
-use yii\base\Module;
-use craft\web\UrlManager;
+use craft\console\Application as ConsoleApplication;
+use craft\events\RegisterCpNavItemsEvent;
+use craft\events\RegisterTemplateRootsEvent;
+use craft\events\RegisterUrlRulesEvent;
 use craft\events\TemplateEvent;
 use craft\i18n\PhpMessageSource;
 use craft\web\twig\variables\Cp;
-use yii\base\InvalidConfigException;
-use craft\events\RegisterCpNavItemsEvent;
-use craft\events\RegisterTemplateRootsEvent;
-use craft\console\Application as ConsoleApplication;
+use craft\web\UrlManager;
+use craft\web\View;
 use modules\adminmodule\assetbundles\adminmodule\AdminModuleAsset;
-use craft\events\RegisterUrlRulesEvent;
+use modules\adminmodule\twigextensions\Admin_TwigExtension;
+use yii\base\Event;
+use yii\base\InvalidConfigException;
+use yii\base\Module;
 
 /**
  * Class AdminModule
@@ -91,6 +92,8 @@ class AdminModule extends Module
         parent::init();
         self::$instance = $this;
 
+        Craft::$app->view->registerTwigExtension(new Admin_TwigExtension());
+
         if (Craft::$app->getRequest()->getIsCpRequest()) {
             Event::on(
                 View::class,
@@ -120,6 +123,9 @@ class AdminModule extends Module
                     'url' => 'admin/projects',
                     'label' => 'Projects',
                     'icon' => '@modules/adminmodule/assetbundles/adminmodule/dist/img/AdminModule-icon.svg',
+                    'subnav' => [
+                        'servers' => ['label' => 'Servers', 'url' => 'admin/servers'],
+                    ],
                 ];
             }
         );

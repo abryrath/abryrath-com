@@ -1,0 +1,22 @@
+{% import '_includes/forms' as forms %}
+<div data-interval-picker>
+    {{ forms.textField({
+        name: name,
+        label: label,
+        disabled: disabled,
+        required: required,
+    }) }}
+
+    {% set intervals = {
+            weeks: 'Weeks',
+            days: 'Days',
+            hours: 'Hours'
+        } %}
+
+    {% for value, label in intervals %}
+        <label>
+            {{ label }}
+            <input class="text" type="number" data-{{value}} value="{{ value == 'days' ? 1 : 0 }}" data-ignore="1" />
+        </label>
+    {% endfor %}
+</div>

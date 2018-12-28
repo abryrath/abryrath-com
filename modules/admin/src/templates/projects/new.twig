@@ -37,11 +37,12 @@
             required: true,
         }) }}
 
-        {{ forms.textField({
+        {% include "admin/_components/intervalPicker" with {
             name: 'backupFrequency',
             label: 'Backup Frequency',
             required: true,
-        }) }}
+            disabled: true,
+        } only %}
 
         {{ forms.textField({
             name: 'keepRecords',

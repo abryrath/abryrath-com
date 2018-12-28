@@ -3,8 +3,8 @@
 namespace modules\adminmodule\services;
 
 use craft\base\Component;
-use DateTime;
 use DateInterval;
+use DateTime;
 use modules\adminmodule\AdminModule;
 use modules\adminmodule\models\Backup;
 use modules\adminmodule\models\Project;
@@ -28,22 +28,37 @@ class BackupService extends Component
                 $this->deleteOldBackups($project);
             }
 
-            $backupFreqSec = $project->getBackupFrequencySeconds();
-            $backupInterval = DateInterval::createFromDateString("{$backupFreqSec} seconds");
+            $nextBackup = $this->getNextScheduledBackup($project->id);
+            $now = new DateTime();
 
-            $lastBackup = $backups[0];
-            $lastBackupTime = new DateTime($lastBackup->date);
-            $nextBackup = $lastBackupTime->add($backupInterval);
-
-            if ($nextBackup < new DateTime()) {
+            if ($nextBackup < $now) {
                 echo "Backup should happen";
             } else {
                 echo "Next backup: " . $nextBackup->format('Y-m-d H:i:s');
+                echo " (about " . $now->diff($nextBackup)->format('%h') . " hours)";
             }
             echo PHP_EOL;
-            
+    
             die;
         }
+    }
+
+    public function getNextScheduledBackup(int $projectId): DateTIme
+    {
+        $project = Project::find($projectId)->one();
+        $lastBackup = $project->getBackups()
+            ->where(['active' => true])
+            ->orderBy('date')
+            ->one();
+        
+        $backupFreqSec = $project->getBackupFrequencySeconds();
+        $backupInterval = DateInterval::createFromDateString("{$backupFreqSec} seconds");
+
+        $lastBackupTime = new DateTime($lastBackup->date);
+        $nextBackup = $lastBackupTime->add($backupInterval);
+
+        return $nextBackup;
+
     }
 
     public function create(int $projectId): ?Backup
@@ -66,6 +81,7 @@ class BackupService extends Component
         $backup = new Backup();
         $backup->projectId = $projectId;
         $backup->date = $date->format('Y-m-d H:i:s');
+        $backup->active = true;
         if (!$backup->save()) {
             return null;
         }

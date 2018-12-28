@@ -98,9 +98,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/project */ "./assets/js/modules/project.js");
 /* harmony import */ var _modules_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/server */ "./assets/js/modules/server.js");
 /* harmony import */ var _modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/createBackupBtn */ "./assets/js/modules/createBackupBtn.js");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/intervalPicker */ "./assets/js/modules/intervalPicker.js");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -114,6 +116,7 @@ var AdminModule = function AdminModule() {
   Object(_modules_project__WEBPACK_IMPORTED_MODULE_0__["onInit"])();
   Object(_modules_server__WEBPACK_IMPORTED_MODULE_1__["onInit"])();
   Object(_modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__["onInit"])();
+  Object(_modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__["onInit"])();
 };
 
 window.onload = function () {
@@ -146,12 +149,16 @@ function () {
 
     this.node = node;
     this.projectId = node.dataset.projectId;
+    this.setDisabled = this.setDisabled.bind(this);
     this.node.addEventListener('click', this.createBackup.bind(this));
   }
 
   _createClass(CreateBackupBtn, [{
     key: "createBackup",
     value: function createBackup() {
+      var _this = this;
+
+      this.setDisabled(true);
       fetch("/admin/admin/projects/".concat(this.projectId, "/backups/new"), {
         method: 'GET',
         credentials: 'same-origin',
@@ -163,7 +170,22 @@ function () {
         return resp.json();
       }).then(function (data) {
         return console.log(data);
+      }).finally(function () {
+        return _this.setDisabled(false);
       });
+    }
+  }, {
+    key: "setDisabled",
+    value: function setDisabled() {
+      var disabled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (disabled) {
+        this.node.classList.add('disabled');
+        this.node.innerText = 'Loading...';
+      } else {
+        this.node.classList.remove('disabled');
+        this.node.innerText = 'Create backup';
+      }
     }
   }]);
 
@@ -175,6 +197,76 @@ var onInit = function onInit() {
 
   if (btn) {
     new CreateBackupBtn(btn);
+  }
+};
+
+/***/ }),
+
+/***/ "./assets/js/modules/intervalPicker.js":
+/*!*********************************************!*\
+  !*** ./assets/js/modules/intervalPicker.js ***!
+  \*********************************************/
+/*! exports provided: onInit */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onInit", function() { return onInit; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var IntervalPicker =
+/*#__PURE__*/
+function () {
+  function IntervalPicker(node) {
+    var _this = this;
+
+    _classCallCheck(this, IntervalPicker);
+
+    this.node = node;
+    this.value = {};
+    this.update = this.update.bind(this);
+    this.inputs = node.querySelectorAll('input[type="number"]');
+    this.inputs.forEach(function (input) {
+      input.addEventListener('change', _this.update);
+    });
+    this.update();
+  }
+
+  _createClass(IntervalPicker, [{
+    key: "update",
+    value: function update() {
+      var _this2 = this;
+
+      var types = ['weeks', 'days', 'hours'];
+      types.forEach(function (type) {
+        var val = _this2.node.querySelector("[data-".concat(type, "]")).value;
+
+        val = parseInt(val);
+
+        if (val < 0) {
+          val = 0;
+        }
+
+        _this2.value[type] = val;
+      });
+      this.node.querySelector('input[type="text"]').value = JSON.stringify(this.value);
+    }
+  }]);
+
+  return IntervalPicker;
+}();
+
+var onInit = function onInit() {
+  var pickers = document.querySelectorAll('[data-interval-picker]');
+
+  if (pickers && pickers.length) {
+    pickers.forEach(function (picker) {
+      new IntervalPicker(picker);
+    });
   }
 };
 
@@ -359,7 +451,7 @@ if(false) {}
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "div#content {\n  padding: 1rem; }\n\n.ProjectForm {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 300ms ease-in-out; }\n  .ProjectForm.active {\n    max-height: 500px;\n    overflow: scroll; }\n\n.ServerForm {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 300ms ease-in-out; }\n  .ServerForm.active {\n    max-height: 500px;\n    overflow: scroll; }\n", ""]);
+exports.push([module.i, "div#content {\n  padding: 1rem; }\n\n.ProjectForm {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 300ms ease-in-out; }\n  .ProjectForm.active {\n    max-height: 100vh;\n    overflow: scroll; }\n\n.ServerForm {\n  max-height: 0;\n  overflow: hidden;\n  transition: max-height 300ms ease-in-out; }\n  .ServerForm.active {\n    max-height: 500px;\n    overflow: scroll; }\n", ""]);
 
 
 

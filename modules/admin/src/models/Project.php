@@ -35,8 +35,6 @@ class Project extends ActiveRecord
         $days = $backupFreq['days'] ?? 0;
         $hours = $backupFreq['hours'] ?? 0;
 
-        var_dump($days);
-
         $seconds = (((((($weeks * 7) + $days) * 24) + $hours) * 60) * 60);
 
         return $seconds;
