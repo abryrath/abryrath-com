@@ -4,4 +4,4 @@ Description=Site Backups Job
 [Service]
 User=abry
 Type=oneshot
-ExecStart=/usr/bin/zsh "/usr/bin/php /home/abry/Sites/abryrath-com/craft admin/default/check 2>&1 | tee -a /var/log/abryrath-backups.log"
+ExecStart=/usr/bin/php /home/abry/Sites/abryrath-com/craft admin/default/check
