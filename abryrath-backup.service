@@ -1,11 +1,7 @@
 [Unit]
-Description=Periodically check to run backups
-
-[Timer]
-OnBootSec=0min
-OnUnitActiveSec=1min
+Description=Site Backups Job
 
 [Service]
 User=abry
-Type=simple
-ExecStart=/usr/bin/php /home/abry/Sites/abryrath-com/craft admin/default/check 2>&1 | tee -a /var/log/abryrath-backups.log
+Type=oneshot
+ExecStart=/usr/bin/zsh "/usr/bin/php /home/abry/Sites/abryrath-com/craft admin/default/check 2>&1 | tee -a /var/log/abryrath-backups.log"

@@ -1,0 +1,9 @@
+[Unit]
+Description=Site Backups
+
+[Timer]
+OnUnitActiveSec=60s
+OnBootActiveSec=60s
+
+[Install]
+WantedBy=timers.target
