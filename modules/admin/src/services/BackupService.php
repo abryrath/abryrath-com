@@ -3,6 +3,7 @@
 namespace modules\adminmodule\services;
 
 use craft\base\Component;
+use craft\fields\Date;
 use DateInterval;
 use DateTime;
 use modules\adminmodule\AdminModule;
@@ -38,23 +39,27 @@ class BackupService extends Component
                 echo " (about " . $now->diff($nextBackup)->format('%h') . " hours)";
             }
             echo PHP_EOL;
-    
-            die;
+
         }
     }
 
     public function getNextScheduledBackup(int $projectId): DateTIme
     {
-        $project = Project::find($projectId)->one();
+        $project = Project::find()
+            ->where(['id' => $projectId])
+            ->one();
+
         $lastBackup = $project->getBackups()
             ->where(['active' => true])
             ->orderBy('date')
             ->one();
+
+        $lastBackupTime = new DateTime($lastBackup->date ?? "1970/1/1 0:0:0");
         
         $backupFreqSec = $project->getBackupFrequencySeconds();
         $backupInterval = DateInterval::createFromDateString("{$backupFreqSec} seconds");
 
-        $lastBackupTime = new DateTime($lastBackup->date);
+        //$lastBackupTime = new DateTime($lastBackup->date);
         $nextBackup = $lastBackupTime->add($backupInterval);
 
         return $nextBackup;
