@@ -3,6 +3,7 @@
 namespace modules\adminmodule\models;
 
 use modules\adminmodule\models\Server;
+use modules\adminmodule\models\Backup;
 use yii\db\ActiveRecord;
 use \DateTime;
 

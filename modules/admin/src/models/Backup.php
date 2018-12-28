@@ -14,6 +14,6 @@ class Backup extends ActiveRecord
 
     public function getProject()
     {
-        return $this->hasOne(Project::class, ['projectId' => 'id']);
+        return $this->hasOne(Project::class, ['id' => 'projectId']);
     }
 }

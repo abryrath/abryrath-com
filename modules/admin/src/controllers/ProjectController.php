@@ -38,7 +38,7 @@ class ProjectController extends Controller
 
     public function actionShow(int $id)
     {
-        $project = Project::find($id)->one();
+        $project = Project::find()->where(['id' => $id])->one();
         if (!$project) {
             echo "Invalid project id";
             die;
