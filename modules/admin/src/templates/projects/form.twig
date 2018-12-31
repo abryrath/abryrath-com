@@ -1,14 +1,23 @@
 {% import '_includes/forms' as forms %}
+{% set edit = false %}
+{% if project.id %}
+    {% set edit = true %}
+{% endif %}
+
+{% set servers = app.server.getServerOptions() %}
+
 <div id="newProject">
     <div class="btn" data-toggle>
-        New Project
+        {% if edit %}Edit{% else %}New{% endif %} Project
     </div>
-    <form data-content class="ProjectForm">
+    <form data-content data-edit="{{ edit ? 1 : 0 }}" class="ProjectForm">
         {{ csrfInput() }}
+        <input type="hidden" name="id" value="{{ project.id }}" />
         {{ forms.textField({
             name: 'displayName',
             label: 'Display Name',
             required: true,
+            value: project.displayName
         }) }}
 
         {{ forms.selectField({
@@ -16,12 +25,14 @@
             label: 'Server',
             required: true,
             options: servers,
+            value: project.serverId,
         }) }}
 
         {{ forms.textField({
             name: 'serverSrcPath',
             label: 'Server Source Path',
             required: true,
+            value: project.serverSrcPath,
         }) }}
 
         {{ forms.selectField({
@@ -29,12 +40,14 @@
             label: 'Backup Server',
             required: true,
             options: servers,
+            value: project.backupServerId
         }) }}
 
         {{ forms.textField({
             name: 'backupServerPath',
             label: 'Backup Server Path',
             required: true,
+            value: project.backupServerPath,
         }) }}
 
         {% include "admin/_components/intervalPicker" with {
@@ -42,18 +55,21 @@
             label: 'Backup Frequency',
             required: true,
             disabled: true,
+            value: project.backupFrequency,
         } only %}
 
         {{ forms.textField({
             name: 'keepRecords',
             label: 'Number of backups to keep',
             required: true,
+            value: project.keepRecords,
         }) }}
 
         {{ forms.textField({
             name: 'email',
             label: 'Email',
-            required: true
+            required: true,
+            value: project.email,
         }) }}
 
         <div class="btn submit" id="submit">Create</div>

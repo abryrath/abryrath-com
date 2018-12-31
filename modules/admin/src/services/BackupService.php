@@ -18,22 +18,20 @@ class BackupService extends Component
 
         foreach ($projects as $project) {
             echo "Checking project: {$project->displayName}" . PHP_EOL;
-            $backups = $project->getBackups()
-                ->where(['active' => true])
-                ->orderBy('date')
-                ->all();
 
-            $recordsToKeep = $project->keepRecords;
-            if (count($backups) > $recordsToKeep) {
-                echo "Deleting oldest backups for {$project->displayName}" . PHP_EOL;
-                $this->deleteOldBackups($project);
-            }
+            $this->deleteOldBackups($projet);
 
             $nextBackup = $this->getNextScheduledBackup($project->id);
             $now = new DateTime();
 
             if ($nextBackup < $now) {
                 echo "Backup should happen";
+                $backup = $this->create($project->id);
+                if ($backup) {
+                    echo "Backup created with ID: {$backup->id}";
+                } else {
+                    echo "Error creating backup";
+                }
             } else {
                 echo "Next backup: " . $nextBackup->format('Y-m-d H:i:s');
                 echo " (about " . $now->diff($nextBackup)->format('%h') . " hours)";
@@ -51,11 +49,11 @@ class BackupService extends Component
 
         $lastBackup = $project->getBackups()
             ->where(['active' => true])
-            ->orderBy('date')
+            ->orderBy(['date' => SORT_DESC])
             ->one();
 
         $lastBackupTime = new DateTime($lastBackup->date ?? "1970/1/1 0:0:0");
-        
+
         $backupFreqSec = $project->getBackupFrequencySeconds();
         $backupInterval = DateInterval::createFromDateString("{$backupFreqSec} seconds");
 
@@ -64,6 +62,23 @@ class BackupService extends Component
 
         return $nextBackup;
 
+    }
+
+    public function deleteOldBackups(Project $project): bool
+    {
+        $backups = $project->getBackups()
+            ->where(['active' => true])
+            ->orderBy(['date' => SORT_ASC])
+            ->all();
+
+        $recordsToKeep = $project->keepRecords;
+        $diff = count($backups) - $recordsToKeep;
+        if ($diff > 0) {
+            echo "Deleting oldest backups for {$project->displayName}" . PHP_EOL;
+            for ($i = 0; $i < $diff; $i++) {
+                var_dump($backups[$i]);
+            }
+        }
     }
 
     public function create(int $projectId): ?Backup

@@ -9,7 +9,7 @@
 {% block content %}
     <div id="content">
         <h1>Backups</h1>
-        <table>
+        <table class="data fullwidth">
             <thead>
                 <td>ID</td>
                 <td>Date</td>
@@ -25,5 +25,10 @@
         <div>Backup Frequency: {{ backupFreq }} hours</div>
         <div>Next backup: {{ nextBackup | date('h:i:s m/d/Y') }}</div>
         <div class="btn" data-project-id="{{ project.id }}" id="CreateBackup">Create backup</div>
+
+        <h2>Edit Settings</h2>
+        {% include 'admin/projects/form' with {
+            project: project
+        } only %}
     </div>
 {% endblock %}

@@ -4,6 +4,11 @@ class ProjectForm {
         this.toggleBtn = node.querySelector('[data-toggle]');
         this.form = node.querySelector('form');
         this.submitBtn = this.form.querySelector('.submit');
+        this.edit = false;
+        
+        if (this.form.dataset.edit) {
+            this.edit = true;
+        }
 
         this.submitBtn.addEventListener('click', this.submit.bind(this));
         this.toggleBtn.addEventListener('click', this.toggleForm.bind(this));
@@ -19,7 +24,14 @@ class ProjectForm {
             formData.append(input.name, input.value);
         });
 
-        fetch('/admin/admin/projects/new', {
+        let url;
+        if (this.edit) {
+            const id = this.form.querySelector('[name="id"').value;
+            url = `/admin/admin/projects/update/${id}`;
+        } else {
+            url = '/admin/admin/projects/new';
+        }
+        fetch(url, {
             credentials: 'same-origin',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',

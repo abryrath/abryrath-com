@@ -113,6 +113,7 @@ class AdminModule extends Module
 
         $this->setComponents([
             'backup' => \modules\adminmodule\services\BackupService::class,
+            'server' => \modules\adminmodule\services\ServerService::class,
         ]);
 
         Event::on(
@@ -138,7 +139,8 @@ class AdminModule extends Module
                 $event->rules['admin/servers/new'] = 'admin/server/new-server';
                 $event->rules['admin/projects'] = 'admin/project/index';
                 $event->rules['admin/projects/new'] = 'admin/project/new-project';
-                $event->rules['admin/projects/<id>'] = 'admin/project/show';
+                $event->rules['admin/projects/update/<projectId>'] = 'admin/project/update';
+                $event->rules['admin/projects/<projectId>'] = 'admin/project/show';
                 $event->rules['admin/projects/<projectId>/backups/new'] = 'admin/backup/create';
             }
         );

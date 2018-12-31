@@ -16,6 +16,8 @@
                 {% endfor %}
             {% endif %}
         </div>
-        {% include 'admin/projects/new' %}
+        {% include 'admin/projects/form' with {
+            project: newProject
+        } %}
     </div>
 {% endblock %}

@@ -5,7 +5,6 @@ namespace modules\adminmodule\controllers;
 use Craft;
 use craft\web\Controller;
 use modules\adminmodule\models\Project;
-use modules\adminmodule\models\Server;
 
 class ProjectController extends Controller
 {
@@ -15,30 +14,18 @@ class ProjectController extends Controller
             ->orderBy('dateCreated')
             ->all();
 
-        $servers = Server::find()
-            ->orderBy('dateCreated')
-            ->all();
-
-        $servers = array_map(function ($server) {
-            return [
-                'key' => $server->id,
-                'value' => $server->id,
-                'label' => $server->displayName,
-            ];
-        }, $servers);
-
         return $this->renderTemplate(
             'admin/projects/index',
             [
                 'projects' => $projects,
-                'servers' => $servers,
+                'newProject' => new Project(),
             ]
         );
     }
 
-    public function actionShow(int $id)
+    public function actionShow(int $projectId)
     {
-        $project = Project::find()->where(['id' => $id])->one();
+        $project = Project::find()->where(['id' => $projectId])->one();
         if (!$project) {
             echo "Invalid project id";
             die;
@@ -74,6 +61,29 @@ class ProjectController extends Controller
 
         return json_encode([
             'success' => false,
+        ]);
+    }
+
+    public function actionUpdate(int $projectId)
+    {
+        $this->requirePostRequest();
+
+        $request = Craft::$app->getRequest();
+        $project = Project::find()
+            ->where(['id' => $projectId])
+            ->one();
+
+        foreach ($request->getBodyParams() as $param => $val) {
+            if (isset($project->{$param})) {
+                if ($project->{$param} != $val) {
+                    $project->{$param} = $val;
+                }
+            }
+        }
+
+        return json_encode([
+            'success' => $project->save(),
+            'project' => $project,
         ]);
     }
 }

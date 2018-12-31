@@ -95,7 +95,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/project */ "./assets/js/modules/project.js");
+/* harmony import */ var _modules_projectForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/projectForm */ "./assets/js/modules/projectForm.js");
 /* harmony import */ var _modules_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/server */ "./assets/js/modules/server.js");
 /* harmony import */ var _modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/createBackupBtn */ "./assets/js/modules/createBackupBtn.js");
 /* harmony import */ var _modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/intervalPicker */ "./assets/js/modules/intervalPicker.js");
@@ -113,7 +113,7 @@ var AdminModule = function AdminModule() {
   _classCallCheck(this, AdminModule);
 
   console.log('Admin');
-  Object(_modules_project__WEBPACK_IMPORTED_MODULE_0__["onInit"])();
+  Object(_modules_projectForm__WEBPACK_IMPORTED_MODULE_0__["onInit"])();
   Object(_modules_server__WEBPACK_IMPORTED_MODULE_1__["onInit"])();
   Object(_modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__["onInit"])();
   Object(_modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__["onInit"])();
@@ -272,10 +272,10 @@ var onInit = function onInit() {
 
 /***/ }),
 
-/***/ "./assets/js/modules/project.js":
-/*!**************************************!*\
-  !*** ./assets/js/modules/project.js ***!
-  \**************************************/
+/***/ "./assets/js/modules/projectForm.js":
+/*!******************************************!*\
+  !*** ./assets/js/modules/projectForm.js ***!
+  \******************************************/
 /*! exports provided: onInit */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -298,6 +298,12 @@ function () {
     this.toggleBtn = node.querySelector('[data-toggle]');
     this.form = node.querySelector('form');
     this.submitBtn = this.form.querySelector('.submit');
+    this.edit = false;
+
+    if (this.form.dataset.edit) {
+      this.edit = true;
+    }
+
     this.submitBtn.addEventListener('click', this.submit.bind(this));
     this.toggleBtn.addEventListener('click', this.toggleForm.bind(this));
   }
@@ -314,7 +320,16 @@ function () {
       this.form.querySelectorAll('input,select').forEach(function (input) {
         formData.append(input.name, input.value);
       });
-      fetch('/admin/admin/projects/new', {
+      var url;
+
+      if (this.edit) {
+        var id = this.form.querySelector('[name="id"').value;
+        url = "/admin/admin/projects/update/".concat(id);
+      } else {
+        url = '/admin/admin/projects/new';
+      }
+
+      fetch(url, {
         credentials: 'same-origin',
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
