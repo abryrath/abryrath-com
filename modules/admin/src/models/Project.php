@@ -32,9 +32,16 @@ class Project extends ActiveRecord
     public function getBackupFrequencySeconds()
     {
         $backupFreq = $this->backupFrequency;
-        $weeks = $backupFreq['weeks'] ?? 0;
-        $days = $backupFreq['days'] ?? 0;
-        $hours = $backupFreq['hours'] ?? 0;
+        if (is_string($backupFreq)) {
+            $backupFreq = json_decode($backupFreq);
+        }
+        if (is_array($backupFreq)) {
+            $backupFreq = json_decode(json_encode($backupFreq));
+        }
+        //var_dump($backupFreq); die;
+        $weeks = $backupFreq->weeks ?? 0;
+        $days = $backupFreq->days ?? 0;
+        $hours = $backupFreq->hours ?? 0;
 
         $seconds = (((((($weeks * 7) + $days) * 24) + $hours) * 60) * 60);
 

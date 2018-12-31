@@ -11,7 +11,7 @@
                 {% for project in projects %}
                     {% include 'admin/projects/listing' with {
                         project: project,
-                        servers: servers,
+                        servers: app.server.getServerOptions(),
                     } only %}
                 {% endfor %}
             {% endif %}
