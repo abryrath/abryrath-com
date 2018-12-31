@@ -3,7 +3,7 @@ Description=Site Backups
 
 [Timer]
 OnUnitActiveSec=60s
-OnBootActiveSec=60s
+OnBootSec=60s
 
 [Install]
 WantedBy=timers.target
