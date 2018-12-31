@@ -79,6 +79,7 @@ class BackupService extends Component
                 var_dump($backups[$i]);
             }
         }
+	return true;
     }
 
     public function create(int $projectId): ?Backup
