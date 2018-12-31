@@ -19,7 +19,7 @@ class BackupService extends Component
         foreach ($projects as $project) {
             echo "Checking project: {$project->displayName}" . PHP_EOL;
 
-            $this->deleteOldBackups($projet);
+            $this->deleteOldBackups($project);
 
             $nextBackup = $this->getNextScheduledBackup($project->id);
             $now = new DateTime();
