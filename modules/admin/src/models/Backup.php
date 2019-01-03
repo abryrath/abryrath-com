@@ -16,4 +16,20 @@ class Backup extends ActiveRecord
     {
         return $this->hasOne(Project::class, ['id' => 'projectId']);
     }
+
+    public function getRemoveCommands(): array
+    {
+        $project = $this->getProject()->one();
+        $backupFile = $projet->getBackupFile($this->date);
+        $backupServer = $project->getBackupServer()->one();
+
+        $sshCommand = $backupServer->sshCommand();
+
+        $commands = [];
+
+        $cmd = $sshCommand . " 'cd {$project->backupServerPath} && rm {$backupFile}";
+        $commands[] = $cmd;
+
+        return $commands;
+    }
 }

@@ -50,8 +50,9 @@ class Project extends ActiveRecord
 
     public function getBackupCommands(DateTime $date): array
     {
-        $date = $date->format('Y-m-d_hia');
-        $backupFile = "{$this->id}-{$date}.tar.gz";
+        $backupFile = $this->getBackupFile($date);
+        //$date = $date->format('Y-m-d_hia');
+        //$backupFile = "{$this->id}-{$date}.tar.gz";
 
         $server = $this->getServer()->one();
         $backupServer = $this->getBackupServer()->one();
@@ -78,5 +79,13 @@ class Project extends ActiveRecord
         $commands[] = $cmd;
 
         return $commands;
+    }
+
+    private function getBackupFile(DateTime $date): string
+    {
+        $date = $date->format('Y-m-d_hia');
+        $backupFile = "{$this->id}-{$date}.tar.gz";
+
+        return $backupFile;
     }
 }

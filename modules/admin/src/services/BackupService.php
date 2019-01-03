@@ -76,10 +76,19 @@ class BackupService extends Component
         if ($diff > 0) {
             echo "Deleting oldest backups for {$project->displayName}" . PHP_EOL;
             for ($i = 0; $i < $diff; $i++) {
-                var_dump($backups[$i]);
+                //var_dump($backups[$i]);
+                foreach ($backups[i]->getRemoveCommands() as $command) {
+                    $output = [];
+                    if (!$this->exec($command, $output)) {
+                        var_dump($output);
+                        die;
+                    }
+                    $backups[$i]->active = false;
+                    $backups[$i]->save();
+                }
             }
         }
-	return true;
+        return true;
     }
 
     public function create(int $projectId): ?Backup
