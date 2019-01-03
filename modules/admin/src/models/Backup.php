@@ -20,7 +20,7 @@ class Backup extends ActiveRecord
     public function getRemoveCommands(): array
     {
         $project = $this->getProject()->one();
-        $backupFile = $projet->getBackupFile($this->date);
+        $backupFile = $project->getBackupFile($this->date);
         $backupServer = $project->getBackupServer()->one();
 
         $sshCommand = $backupServer->sshCommand();
