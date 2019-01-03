@@ -2,6 +2,7 @@
 
 namespace modules\adminmodule\models;
 
+use DateTime;
 use modules\adminmodule\models\Project;
 use yii\db\ActiveRecord;
 
@@ -20,7 +21,7 @@ class Backup extends ActiveRecord
     public function getRemoveCommands(): array
     {
         $project = $this->getProject()->one();
-        $backupFile = $project->getBackupFile($this->date);
+        $backupFile = $project->getBackupFile(new DateTime($this->date));
         $backupServer = $project->getBackupServer()->one();
 
         $sshCommand = $backupServer->sshCommand();
