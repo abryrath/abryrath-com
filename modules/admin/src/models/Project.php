@@ -81,7 +81,7 @@ class Project extends ActiveRecord
         return $commands;
     }
 
-    private function getBackupFile(DateTime $date): string
+    public function getBackupFile(DateTime $date): string
     {
         $date = $date->format('Y-m-d_hia');
         $backupFile = "{$this->id}-{$date}.tar.gz";
