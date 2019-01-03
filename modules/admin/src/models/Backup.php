@@ -28,7 +28,7 @@ class Backup extends ActiveRecord
 
         $commands = [];
 
-        $cmd = $sshCommand . " 'cd {$project->backupServerPath} && rm {$backupFile}";
+        $cmd = $sshCommand . " 'cd {$project->backupServerPath} && rm {$backupFile}'";
         $commands[] = $cmd;
 
         return $commands;
