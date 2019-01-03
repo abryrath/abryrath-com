@@ -93,7 +93,7 @@ class BackupService extends Component
 
     public function create(int $projectId): ?Backup
     {
-        $project = Project::find($projectId)->one();
+        $project = Project::find()->where(['id' => $projectId])->one();
         $log = [];
 
         $date = (new DateTime());
