@@ -1,4 +1,4 @@
-class ServerForm {
+export class ServerForm {
     constructor(node) {
         this.node = node;
         this.toggleBtn = node.querySelector('[data-toggle]');
@@ -19,7 +19,7 @@ class ServerForm {
             formData.append(input.name, input.value);
         });
 
-        fetch('/admin/admin/servers/new', {
+        fetch('/admin/admin/servers/create', {
             credentials: 'same-origin',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',

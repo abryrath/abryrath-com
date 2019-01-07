@@ -85,7 +85,7 @@ class Project extends ActiveRecord
     {
         $date = $date->format('Y-m-d_hia');
         $backupFile = "{$this->id}-{$date}.tar.gz";
-
+        var_dump($backupFile);
         return $backupFile;
     }
 }

@@ -96,12 +96,14 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_projectForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/projectForm */ "./assets/js/modules/projectForm.js");
-/* harmony import */ var _modules_server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/server */ "./assets/js/modules/server.js");
-/* harmony import */ var _modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/createBackupBtn */ "./assets/js/modules/createBackupBtn.js");
-/* harmony import */ var _modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/intervalPicker */ "./assets/js/modules/intervalPicker.js");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
-/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _modules_projectListing__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/projectListing */ "./assets/js/modules/projectListing.js");
+/* harmony import */ var _modules_server__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/server */ "./assets/js/modules/server.js");
+/* harmony import */ var _modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/createBackupBtn */ "./assets/js/modules/createBackupBtn.js");
+/* harmony import */ var _modules_intervalPicker__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/intervalPicker */ "./assets/js/modules/intervalPicker.js");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../scss/Admin.scss */ "./assets/scss/Admin.scss");
+/* harmony import */ var _scss_Admin_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_scss_Admin_scss__WEBPACK_IMPORTED_MODULE_5__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -114,9 +116,10 @@ var AdminModule = function AdminModule() {
 
   console.log('Admin');
   Object(_modules_projectForm__WEBPACK_IMPORTED_MODULE_0__["onInit"])();
-  Object(_modules_server__WEBPACK_IMPORTED_MODULE_1__["onInit"])();
-  Object(_modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_2__["onInit"])();
-  Object(_modules_intervalPicker__WEBPACK_IMPORTED_MODULE_3__["onInit"])();
+  Object(_modules_projectListing__WEBPACK_IMPORTED_MODULE_1__["onInit"])();
+  Object(_modules_server__WEBPACK_IMPORTED_MODULE_2__["onInit"])();
+  Object(_modules_createBackupBtn__WEBPACK_IMPORTED_MODULE_3__["onInit"])();
+  Object(_modules_intervalPicker__WEBPACK_IMPORTED_MODULE_4__["onInit"])();
 };
 
 window.onload = function () {
@@ -159,7 +162,7 @@ function () {
       var _this = this;
 
       this.setDisabled(true);
-      fetch("/admin/admin/projects/".concat(this.projectId, "/backups/new"), {
+      fetch("/admin/admin/projects/".concat(this.projectId, "/backups/create"), {
         method: 'GET',
         credentials: 'same-origin',
         mode: 'same-origin',
@@ -276,11 +279,12 @@ var onInit = function onInit() {
 /*!******************************************!*\
   !*** ./assets/js/modules/projectForm.js ***!
   \******************************************/
-/*! exports provided: onInit */
+/*! exports provided: ProjectForm, onInit */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectForm", function() { return ProjectForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onInit", function() { return onInit; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -299,8 +303,9 @@ function () {
     this.form = node.querySelector('form');
     this.submitBtn = this.form.querySelector('.submit');
     this.edit = false;
+    var edit = this.form.dataset.edit;
 
-    if (this.form.dataset.edit) {
+    if (edit && parseInt(edit) > 0) {
       this.edit = true;
     }
 
@@ -326,7 +331,7 @@ function () {
         var id = this.form.querySelector('[name="id"').value;
         url = "/admin/admin/projects/update/".concat(id);
       } else {
-        url = '/admin/admin/projects/new';
+        url = '/admin/admin/projects/create';
       }
 
       fetch(url, {
@@ -346,7 +351,6 @@ function () {
 
   return ProjectForm;
 }();
-
 var onInit = function onInit() {
   var form = document.querySelector('#newProject');
 
@@ -357,15 +361,86 @@ var onInit = function onInit() {
 
 /***/ }),
 
-/***/ "./assets/js/modules/server.js":
-/*!*************************************!*\
-  !*** ./assets/js/modules/server.js ***!
-  \*************************************/
-/*! exports provided: onInit */
+/***/ "./assets/js/modules/projectListing.js":
+/*!*********************************************!*\
+  !*** ./assets/js/modules/projectListing.js ***!
+  \*********************************************/
+/*! exports provided: ProjectListing, onInit */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProjectListing", function() { return ProjectListing; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onInit", function() { return onInit; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ProjectListing =
+/*#__PURE__*/
+function () {
+  function ProjectListing(node) {
+    _classCallCheck(this, ProjectListing);
+
+    this.node = node;
+    this.id = this.node.dataset.id;
+    this.removeUrl = "/admin/admin/projects/remove/".concat(this.id);
+    this.deleteBtn = this.node.querySelector('.delete');
+    this.deleteBtn.addEventListener('click', this.delete);
+    this.delete = this.delete.bind(this);
+    this.remove = this.remove.bind(this);
+  }
+
+  _createClass(ProjectListing, [{
+    key: "delete",
+    value: function _delete() {
+      var _this = this;
+
+      fetch(this.removeUrl, {
+        credentials: 'same-origin',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }).then(function (resp) {
+        return resp.json();
+      }).then(function (data) {
+        console.log(data);
+
+        if (data.success == 1) {
+          _this.remove();
+        }
+      });
+    }
+  }, {
+    key: "remove",
+    value: function remove() {
+      this.deleteBtn.removeEventListener('click', this.delete);
+      this.node.innerHTML = '';
+    }
+  }]);
+
+  return ProjectListing;
+}();
+var onInit = function onInit() {
+  document.querySelectorAll('.ProjectListing').forEach(function (listing) {
+    new ProjectListing(listing);
+  });
+};
+
+/***/ }),
+
+/***/ "./assets/js/modules/server.js":
+/*!*************************************!*\
+  !*** ./assets/js/modules/server.js ***!
+  \*************************************/
+/*! exports provided: ServerForm, onInit */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServerForm", function() { return ServerForm; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onInit", function() { return onInit; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -399,7 +474,7 @@ function () {
       this.form.querySelectorAll('input').forEach(function (input) {
         formData.append(input.name, input.value);
       });
-      fetch('/admin/admin/servers/new', {
+      fetch('/admin/admin/servers/create', {
         credentials: 'same-origin',
         headers: {
           'X-Requested-With': 'XMLHttpRequest'
@@ -416,7 +491,6 @@ function () {
 
   return ServerForm;
 }();
-
 var onInit = function onInit() {
   var form = document.querySelector('#newServer');
 

@@ -36,7 +36,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function actionNewProject()
+    public function actionCreate()
     {
         $this->requirePostRequest();
 
@@ -85,5 +85,13 @@ class ProjectController extends Controller
             'success' => $project->save(),
             'project' => $project,
         ]);
+    }
+
+    public function actionRemove(int $projectId)
+    {
+        $project = Project::find()->where(['id' => $projectId])->one();
+        return (json_encode([
+            'success' => $project->delete(),
+        ]));
     }
 }

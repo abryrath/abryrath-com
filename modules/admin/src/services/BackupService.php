@@ -122,7 +122,7 @@ class BackupService extends Component
     private function exec(string $command, array &$output = []): bool
     {
         $resultVar = null;
-
+        echo "{$command}" . PHP_EOL;
         exec($command, $output, $resultVar);
 
         if (intval($resultVar) !== 0) {

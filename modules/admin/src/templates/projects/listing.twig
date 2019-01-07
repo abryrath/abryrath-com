@@ -1,4 +1,7 @@
-<div class="ProjectListing" id="ProjectListing-{{ project.id }}">
-    <a href="/admin/admin/projects/{{ project.id }}">{{ project.displayName }}</a>
-    <div class="btn" data-toggle>Edit</div>
-</div>
+<tr class="ProjectListing" id="ProjectListing-{{ project.id }}" data-id="{{ project.id }}">
+    <td><a href="/admin/admin/projects/{{ project.id }}">{{ project.displayName }}</a></td>
+    <td>
+        <div class="btn" data-toggle>Edit</div>
+        <div class="btn delete">Remove</div>
+    </td>
+</tr>

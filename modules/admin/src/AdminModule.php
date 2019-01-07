@@ -121,10 +121,12 @@ class AdminModule extends Module
             Cp::EVENT_REGISTER_CP_NAV_ITEMS,
             function (RegisterCpNavItemsEvent $event) {
                 $event->navItems[] = [
-                    'url' => 'admin/projects',
-                    'label' => 'Projects',
+                    'url' => 'admin',
+                    'label' => 'Admin',
                     'icon' => '@modules/adminmodule/assetbundles/adminmodule/dist/img/AdminModule-icon.svg',
                     'subnav' => [
+                        'home' => ['label' => 'Home', 'url' => 'admin'],
+                        'projects' => ['label' => 'Projects', 'url' => 'admin/projects'],
                         'servers' => ['label' => 'Servers', 'url' => 'admin/servers'],
                     ],
                 ];
@@ -136,12 +138,13 @@ class AdminModule extends Module
             UrlManager::EVENT_REGISTER_CP_URL_RULES,
             function (RegisterUrlRulesEvent $event) {
                 $event->rules['admin/servers'] = 'admin/server/index';
-                $event->rules['admin/servers/new'] = 'admin/server/new-server';
+                $event->rules['admin/servers/create'] = 'admin/server/create';
                 $event->rules['admin/projects'] = 'admin/project/index';
-                $event->rules['admin/projects/new'] = 'admin/project/new-project';
+                $event->rules['admin/projects/create'] = 'admin/project/create';
+                $event->rules['admin/projects/remove/<projectId>'] = 'admin/project/remove';
                 $event->rules['admin/projects/update/<projectId>'] = 'admin/project/update';
                 $event->rules['admin/projects/<projectId>'] = 'admin/project/show';
-                $event->rules['admin/projects/<projectId>/backups/new'] = 'admin/backup/create';
+                $event->rules['admin/projects/<projectId>/backups/create'] = 'admin/backup/create';
             }
         );
 

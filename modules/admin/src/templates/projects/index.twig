@@ -7,17 +7,24 @@
 {% block main %}
     <div id="content">
         <div class="Projects">
-            {% if projects is defined %}
-                {% for project in projects %}
-                    {% include 'admin/projects/listing' with {
-                        project: project,
-                        servers: app.server.getServerOptions(),
-                    } only %}
-                {% endfor %}
-            {% endif %}
+            <table class="data fullwidth">
+                <thead>
+                    <td>Name</td>
+                    <td></td>
+                </thead>
+                {% if projects is defined %}
+                    {% for project in projects %}
+                        {% include 'admin/projects/listing' with {
+                            project: project,
+                            servers: app.server.getServerOptions(),
+                        } only %}
+                    {% endfor %}
+                {% endif %}
+            </table>
+            <hr>
+            {% include 'admin/projects/form' with {
+                project: newProject
+            } %}
         </div>
-        {% include 'admin/projects/form' with {
-            project: newProject
-        } %}
     </div>
 {% endblock %}

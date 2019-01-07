@@ -8,7 +8,7 @@ class CreateBackupBtn {
 
     createBackup() {
         this.setDisabled(true);
-        fetch(`/admin/admin/projects/${this.projectId}/backups/new`, {
+        fetch(`/admin/admin/projects/${this.projectId}/backups/create`, {
                 method: 'GET',
                 credentials: 'same-origin',
                 mode: 'same-origin',

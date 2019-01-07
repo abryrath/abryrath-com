@@ -1,12 +1,13 @@
-class ProjectForm {
+export class ProjectForm {
     constructor(node) {
         this.node = node;
         this.toggleBtn = node.querySelector('[data-toggle]');
         this.form = node.querySelector('form');
         this.submitBtn = this.form.querySelector('.submit');
         this.edit = false;
-        
-        if (this.form.dataset.edit) {
+
+        const edit = this.form.dataset.edit;
+        if (edit && parseInt(edit) > 0) {
             this.edit = true;
         }
 
@@ -29,15 +30,15 @@ class ProjectForm {
             const id = this.form.querySelector('[name="id"').value;
             url = `/admin/admin/projects/update/${id}`;
         } else {
-            url = '/admin/admin/projects/new';
+            url = '/admin/admin/projects/create';
         }
         fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-            method: "POST",
-            body: formData,
+                credentials: 'same-origin',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                method: "POST",
+                body: formData,
             })
             .then(resp => resp.json())
             .then(data => console.log(data));
